@@ -1,0 +1,11 @@
+name: han1222
+request:
+  method: get
+  params:
+    ajax: ajax
+    application: app
+    application_client: weixin
+    s: index/index
+  url: http://101.34.221.219:8010/api.php
+validate: null
+
