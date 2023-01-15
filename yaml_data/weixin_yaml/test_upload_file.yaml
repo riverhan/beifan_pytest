@@ -1,10 +1,10 @@
--
-  name: 上传文件
-  request:
-    url: https://api.weixin.qq.com/cgi-bin/media/uploadimg
-    method: post
-    params:
-      access_token: ${read_yaml(access_token)}
-    files:
-      media: 2023.jpg
-  validate:
+name: 上传文件
+request:
+  url: https://api.weixin.qq.com/cgi-bin/media/uploadimg
+  method: post
+  params:
+    access_token: ${read_yaml(access_token)}
+  files:
+    media: 2023.jpg
+validate: null
+extract: null

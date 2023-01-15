@@ -1,9 +1,0 @@
--
-  name: 创建标签接口
-  request:
-    url: https://api.weixin.qq.com/cgi-bin/tags/create
-    method: POST
-    params:
-      access_token: ${read_yaml(access_token)}
-    data: {"tag": {"name":"er"}
-  validate:

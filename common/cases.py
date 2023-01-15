@@ -11,9 +11,9 @@ import pytest
 
 from common.session import Session
 
-from common.files import YamlFile
+from common.yamUtil import YamlFile
 
-case_path = Path('../yaml_data/shop_yaml')
+case_path = Path('/Users/riveryoyo/PycharmProjects/beifan_pytest/yaml_data/')
 
 
 class TestApi:
@@ -24,19 +24,16 @@ class TestApi:
         查找yaml文件
         :return:
         """
-        yam_path_list = case_path.glob('test_*.yaml')
+        yam_path_list = case_path.glob('**/test_*.yaml')
         for yaml_path in yam_path_list:
-            print(yaml_path.name)
             files = YamlFile(yaml_path)
             case_func = cls.new_case(files)
-            print(files.get('request'))
             setattr(cls, f"{yaml_path.name}", case_func)
 
     @classmethod
     def new_case(cls, files):
         def test_func(self):
-            response = Session().request(**files.get('request'))
-            print(response.status_code)
+            Session().request(**files.get('request'))
 
         return test_func
 
