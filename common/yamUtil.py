@@ -18,7 +18,6 @@ class CaseInfo(object):
     validate: dict
 
 
-@dataclass()
 class YamlFile(dict):
     def __init__(self, path):
         super().__init__()

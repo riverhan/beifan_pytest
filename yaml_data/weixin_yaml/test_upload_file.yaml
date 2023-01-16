@@ -3,7 +3,7 @@ request:
   url: https://api.weixin.qq.com/cgi-bin/media/uploadimg
   method: post
   params:
-    access_token: 64_5dE-0MOvvPN07mWuBUZLaDQq8EBbY8E8b473LqH82skiPHQ_maSU0WQlN4ac-kcyim2hds2FRGzlLIrvq3AiKrwApo9WZUcKggsiErqPZO_Q06F_jgzZe6olmeEEGOeAAAXZH
+    access_token: 64_m2yuvFlWeKuXss8TMi0uqFIkfH8JKdAPj7qpoNeIvTGZ626SuQNuDRu2ImqkxbqbEEk_iT1Jhnuy-epc8vkUyVRYmjOXQUZfTb1VAsiqU2XG4aNfCemSOqyYob4UCBdAGAGON
   files:
     media: 2023.jpg
 validate: null

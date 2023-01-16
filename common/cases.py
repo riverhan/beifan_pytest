@@ -29,11 +29,15 @@ class TestApi:
         for yaml_path in yam_path_list:
             files = YamlFile(yaml_path)
             case_func = cls.new_case(files)
-            setattr(cls, f"{yaml_path.name}", case_func)
+            setattr(cls, f"{yaml_path.name.split('.')[0]}", case_func)
 
     @classmethod
     def new_case(cls, files):
         def test_func(self):
+            if 'files' in files['request']:
+                for k, v in files['request']['files'].items():
+                    print(files['request']['files'][k])
+                    files['request']['files'][k] = open(v, 'rb')
             Session().request(**files.get('request'))
 
         return test_func
