@@ -13,7 +13,8 @@ from common.session import Session
 
 from common.yamUtil import YamlFile
 
-case_path = Path('/Users/riveryoyo/PycharmProjects/beifan_pytest/yaml_data/')
+# case_path = Path('/Users/riveryoyo/PycharmProjects/beifan_pytest/yaml_data/')
+case_path = Path(r'E:\PycharmProjects\beifan_pytest\yaml_data/')
 
 
 class TestApi:

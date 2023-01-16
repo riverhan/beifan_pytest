@@ -3,6 +3,6 @@ request:
   method: get
   url: https://api.weixin.qq.com/cgi-bin/tags/get
   params:
-    access_token: ${read_yaml(access_token)}
+    access_token: 64_5dE-0MOvvPN07mWuBUZLaDQq8EBbY8E8b473LqH82skiPHQ_maSU0WQlN4ac-kcyim2hds2FRGzlLIrvq3AiKrwApo9WZUcKggsiErqPZO_Q06F_jgzZe6olmeEEGOeAAAXZH
 validate: null
 extract: null
