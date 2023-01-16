@@ -5,6 +5,8 @@
 @IDE ：PyCharm
 
 """
+import os
+import sys
 from dataclasses import dataclass
 
 import yaml
@@ -18,6 +20,7 @@ class CaseInfo(object):
     validate: dict
 
 
+@dataclass()
 class YamlFile(dict):
     def __init__(self, path):
         super().__init__()
@@ -36,7 +39,13 @@ class YamlFile(dict):
             yaml.dump(dict(self), f, encoding='utf-8')
 
     def verify_data(self):
-        CaseInfo(**self)
+        try:
+            CaseInfo(**self)
+        except Exception as e:
+            print('\033[1;31;40m', end=' ')
+            print(e, "\n", "缺少必要的参数，请检查YAML文件-->{}".format(self._path.name))
+            os._exit(os.EX_OK)
+            print('\033[0m')
 
 
 if __name__ == '__main__':
