@@ -7,14 +7,19 @@
 """
 from pathlib import Path
 
-import pytest
+import platform
 
 from common.session import Session
 
 from common.yamUtil import YamlFile
 
-case_path = Path('/Users/riveryoyo/PycharmProjects/beifan_pytest/yaml_data/')
-# case_path = Path(r'E:\PycharmProjects\beifan_pytest\yaml_data/')
+
+def system_type():
+    if platform.system() == 'Windows':
+        case_path = Path(r'E:\PycharmProjects\beifan_pytest\yaml_data/shop_yaml')
+    else:
+        case_path = Path('/Users/riveryoyo/PycharmProjects/beifan_pytest/yaml_data/shop_yaml')
+    return case_path
 
 
 class TestApi:
@@ -25,6 +30,8 @@ class TestApi:
         查找yaml文件
         :return:
         """
+        case_path = system_type()
+        print(case_path)
         yam_path_list = case_path.glob('**/test_*.yaml')
         for yaml_path in yam_path_list:
             files = YamlFile(yaml_path)

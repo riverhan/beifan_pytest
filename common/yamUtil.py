@@ -14,6 +14,9 @@ import yaml
 
 @dataclass()
 class CaseInfo(object):
+    """
+    判断实例化时是否存在name, request, extract, validate这四个属性
+    """
     name: str
     request: dict
     extract: dict

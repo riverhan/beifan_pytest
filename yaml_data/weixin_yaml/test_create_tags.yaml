@@ -6,4 +6,5 @@ request:
     access_token: 64_m2yuvFlWeKuXss8TMi0uqFIkfH8JKdAPj7qpoNeIvTGZ626SuQNuDRu2ImqkxbqbEEk_iT1Jhnuy-epc8vkUyVRYmjOXQUZfTb1VAsiqU2XG4aNfCemSOqyYob4UCBdAGAGON
   json: {"tag": {"name":"er1"}}
 validate: null
-extract: null
+extract:
+  token: [cookie, $.token, index]
