@@ -9,6 +9,8 @@ from pathlib import Path
 
 import platform
 
+from common.caseinfo import CaseInfo
+from common.exchange import Exchange
 from common.session import Session
 
 from common.yamUtil import YamlFile
@@ -22,6 +24,9 @@ def system_type():
     return case_path
 
 
+exchanger = Exchange('extract.yaml')
+
+
 class TestApi:
 
     @classmethod
@@ -31,21 +36,26 @@ class TestApi:
         :return:
         """
         case_path = system_type()
-        print(case_path)
         yam_path_list = case_path.glob('**/test_*.yaml')
         for yaml_path in yam_path_list:
             files = YamlFile(yaml_path)
-            case_func = cls.new_case(files)
+            case_info = CaseInfo(**files)
+            case_func = cls.new_case(case_info)
             setattr(cls, f"{yaml_path.name.split('.')[0]}", case_func)
 
     @classmethod
     def new_case(cls, files):
         def test_func(self):
-            if 'files' in files['request']:
-                for k, v in files['request']['files'].items():
-                    print(files['request']['files'][k])
-                    files['request']['files'][k] = open(v, 'rb')
-            Session().request(**files.get('request'))
+            new_files = exchanger.replace(files)
+            if 'files' in new_files.request:
+                for k, v in new_files.request['files'].items():
+                    print(new_files.request['files'][k])
+                    new_files.request['files'][k] = open(v, 'rb')
+            result = Session().request(**new_files.request)
+            print(new_files.extract)
+            if new_files.extract is not None:
+                for key, val in new_files.extract.items():
+                    exchanger.extract(result, key, *val)
 
         return test_func
 

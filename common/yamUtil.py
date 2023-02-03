@@ -5,31 +5,17 @@
 @IDE ：PyCharm
 
 """
-import os
-import sys
-from dataclasses import dataclass
-
 import yaml
 
-
-@dataclass()
-class CaseInfo(object):
-    """
-    判断实例化时是否存在name, request, extract, validate这四个属性
-    """
-    name: str
-    request: dict
-    extract: dict
-    validate: dict
+from common.caseinfo import CaseInfo
 
 
-@dataclass()
 class YamlFile(dict):
     def __init__(self, path):
         super().__init__()
         self._path = path
         self.yaml_load()
-        self.verify_data()
+        # self.verify_data()
 
     def yaml_load(self):
         with open(self._path, 'r', encoding='utf-8') as f:
@@ -41,15 +27,11 @@ class YamlFile(dict):
         with open(self._path, 'w', encoding='utf-8') as f:
             yaml.dump(dict(self), f, encoding='utf-8')
 
-    def verify_data(self):
-        try:
-            CaseInfo(**self)
-        except Exception as e:
-            print('\033[1;31;40m', end=' ')
-            print(e, "\n", "缺少必要的参数，请检查YAML文件-->{}".format(self._path.name))
-            os._exit(os.EX_OK)
-            print('\033[0m')
-
 
 if __name__ == '__main__':
-    files = YamlFile('../yaml_data/shop_yaml/test_login.yaml')
+    files = YamlFile('../yaml_data/weixin_yaml/test_login.yaml')
+    cases_info = CaseInfo(**files)
+    a = cases_info.to_yaml()
+    b = cases_info.by_yaml()
+    cases_info1 = CaseInfo(**b)
+    print(cases_info1)
